@@ -1,113 +1,132 @@
-import Image from "next/image";
+'use client';
+import FeatureInfo from '@/components/FeatureInfo';
+import Footer from '@/components/Footer';
+import axios from 'axios';
+import Image from 'next/image';
+import { useState } from 'react';
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+  const [email, setEmail] = useState('');
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
+  const addToWaitlist = async () => {
+    try {
+      const res = await axios.post('api-route/addToWaitlist', {
+        email: email,
+      });
+      console.log(res?.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  return (
+    <div className=" bg-gradient-to-bl from-[#18153b] to-[#1d274b] relative">
+      {/* Background */}
+      <Image
+        className="absolute"
+        src={'/background.png'}
+        alt="backgroud"
+        fill
+      />
+      {/* Dots */}
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute top-40 left-20" />
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute top-40 left-60" />
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute top-60 left-80" />
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute top-40 right-20" />
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute top-50 right-60" />
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute top-30 right-30" />
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute top-70 right-20" />
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute bottom-20 left-50" />
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute bottom-40 right-40" />
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute bottom-20 left-20" />
+      <b className="w-1 h-1 rounded-full bg-slate-400 absolute bottom-40 left-60" />
+
+      <div className="text-center py-12 md:py-28">
+        <p className="text-white text-2xl md:text-3xl">
+          Compliance Management Redefined
+        </p>
+        <p className="bg-gradient-to-b from-white via-slate-400 to-slate-600 text-transparent bg-clip-text text-2xl md:text-3xl">
+          Simple, Smart, Productive
+        </p>
+        <p className="text-[#9F9F9F] text-base md:text-lg ">
+          Seamless workflows, Crafted by AI Innovation
+        </p>
+      </div>
+      <div className="flex flex-col md:flex-row px-4 justify-center pb-12 gap-4 relative z-10">
+        <input
+          className="outline-none bg-transparent w-full md:w-80 text-white placeholder:text-[#9F9F9F] border border-white rounded p-2"
+          placeholder="Company Email ID"
+          onChange={(e) => setEmail(e.target.value)} //handling input change
+          value={email}
+        />
+        <button
+          className="rounded bg-white px-4 py-2 text-[#34416B]"
+          onClick={() => addToWaitlist()}
+        >
+          Join Waitlist
+        </button>
+      </div>
+      <div className="text-center">
+        <p className="pb-2 text-base md:text-lg text-[#9F9F9F]">
+          Secure a competitive advantage in
+        </p>
+      </div>
+      <div className="flex flex-col text-center md:flex-row md:justify-between pb-20 md:pb-32 px-20">
+        <p className="inline-block text-2xl md:text-3xl font-bold bg-gradient-to-r from-  via-slate-500 to-slate-400 text-transparent bg-clip-text">
+          Banking
+        </p>
+        <p className="inline-block text-2xl md:text-3xl font-bold bg-gradient-to-r from-slate-700 via-slate-400 to-slate-200 text-transparent bg-clip-text">
+          Legal Services
+        </p>{' '}
+        <p className="inline-block text-2xl md:text-3xl font-bold text-white">
+          Education
+        </p>{' '}
+        <p className="inline-block text-2xl md:text-3xl font-bold bg-gradient-to-r from-slate-200 via-slate-400 to-slate-700 text-transparent bg-clip-text">
+          Healthcare
+        </p>{' '}
+        <p className="inline-block text-2xl md:text-3xl font-bold bg-gradient-to-r from-slate-400 via-slate-500 to- text-transparent bg-clip-text">
+          Telecomm
+        </p>
+      </div>
+      <div className="flex justify-center">
+        <p className="text-[#9F9F9F] text-2xl md:text-3xl">
+          Understand Our Mission
+        </p>
+      </div>
+      <div className="flex justify-center">
         <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
+          src={'/video.png'}
+          width={800}
+          height={600}
+          alt="video"
+          className="object-cover w-full md:w-auto md:object-none z-10"
         />
       </div>
+      {/* shadow */}
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="flex flex-col md:flex-row justify-between gap-8 py-8 md:py-16 px-4 md:px-20">
+        <FeatureInfo
+          icon={'/icon1.png'}
+          title={'Intuitive Dashboard'}
+          content={
+            'User-friendly interface providing seamless navigation and effortlessly accessible data insights facilitating a streamlined workflow.'
+          }
+        />
+        <FeatureInfo
+          icon={'/icon2.png'}
+          title={'Accurate Risk Assessment'}
+          content={
+            'Analyzing uncertainties and severity of regulations and circulars to safeguard operations and enhance proactive decision-making.'
+          }
+        />
+        <FeatureInfo
+          icon={'/icon3.png'}
+          title={'Compliance Co-Pilot'}
+          content={
+            'Navigating regulatory landscapes with precision and ease, your trusted partner in ensuring adherence to industry standards.'
+          }
+        />
       </div>
-    </main>
+      <Footer />
+    </div>
   );
 }
